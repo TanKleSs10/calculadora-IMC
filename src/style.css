@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --background-color: #080d26; /* Azul oscuro del fondo */
+  --text-color: #ffffff; /* Blanco para textos y elementos */
+  --button-color: #f20574; /* Rosa/fucsia para el botón */
+  --secondary-background-color: #161c40; /* Tono más claro del fondo para algunos elementos */
+  --secondary-text-color: #b8bacf; /* Tono más claro del fondo para algunos elementos */
+  --slider-color: #f21b91; /* Color del slider */
+  --slider-thumb-color: #ff007f; /* Color del thumb del slider */
+  --slider-track-color: #cccccc; /* Color del track del slider */
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--secondary-text-color);
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  box-sizing: border-box;
+}
+.header {
+  width: 100%;
+  height: 80px;
+  box-shadow: 0px 0px 20px 5px rgb(0, 0, 0);
+  margin-bottom: 8px;
+}
+.header__title {
+  color: var(--text-color);
+  text-align: center;
+  line-height: 30px;
+  font-size: 30px;
+}
+
+.bmi-calculator {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-content: center;
+}
+.bmi-calculator__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.bmi-calculator__section {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 15px;
+  grid-template-rows: repeat(1fr);
+}
+.bmi-calculator__input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  padding: 20px 25px;
+  gap: 15px;
+  background: var(--secondary-background-color);
+}
+.bmi-calculator__input input[type="radio"] {
+  display: none;
+}
+.bmi-calculator__input input[type="radio"]:checked + .bmi-calculator__value,
+.bmi-calculator__input
+  input[type="radio"]:checked
+  + .bmi-calculator__value
+  + .bmi-calculator__gender-text {
+  color: var(--text-color);
+}
+.bmi-calculator__range {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: var(--slider-track-color);
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.bmi-calculator__range:hover {
+  opacity: 1;
+}
+.bmi-calculator__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--button-color);
+  cursor: pointer;
+}
+.bmi-calculator__range::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--button-color);
+  cursor: pointer;
+}
+.bmi-calculator-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.bmi-calculator__button {
+  width: 36px;
+  height: 36px;
+  color: var(--text-color);
+  background: #23274a;
+  border-radius: 100%;
+  border: none;
+}
+.bmi-calculator__label {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+.bmi-calculator__range {
+  height: 3px;
+  width: 100%;
+}
+.bmi-calculator__value {
+  display: block;
+  text-align: right;
+  margin-top: 5px;
+  font-size: 40px;
+  text-align: center;
+  font-weight: 700;
+}
+.bmi-calculator__value-text-white {
+  color: var(--text-color);
+}
+.bmi-calculator__submit {
+  background-color: var(--button-color);
+  color: var(--text-color);
+  font-size: x-large;
+  padding: 10px;
+  border: none;
+  margin: 0 auto;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+.bmi-calculator__submit:hover {
+  background-color: var(--slider-thumb-color);
+}
+/* Estilos para la notificación tipo toast */
+#toast-container {
+  position: fixed;
+  top: 85px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  background-color: #ff6b6b;
+  color: #fff;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInOut 3s forwards;
+}
+
+.toast i {
+  margin-right: 10px;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s;
+}
+
+.modal-content {
+  background-color: var(--background-color);
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+  border-radius: 8px;
+  animation: scaleIn 0.3s;
+}
+.modal.show {
+  display: block;
+  animation: fadeIn 0.3s;
+}
+
+.modal.hide {
+  display: block;
+  animation: fadeOut 0.3s;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bmi-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.bmi-table th,
+.bmi-table td {
+  border: 1px solid var(--secondary-background-color);
+  padding: 8px;
+  text-align: center;
+}
+
+.bmi-table th {
+  background-color: var(--secondary-background-color);
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media (min-width: 600px) {
+  .bmi-calculator {
+    width: 80%;
+  }
+
+  .bmi-calculator__section {
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+@media (min-width: 768px) {
+  .bmi-calculator {
+    width: 70%;
+  }
+
+  .bmi-calculator__submit {
+    font-size: large;
+  }
+}
+@media (min-width: 1024px) {
+  .bmi-calculator {
+    width: 60%;
+  }
+
+  .bmi-calculator__submit {
+    font-size: x-large;
+  }
+}
+@media (min-width: 1440px) {
+  .bmi-calculator {
+    width: 50%;
+  }
+
+  .bmi-calculator__submit {
+    font-size: xx-large;
+  }
+}

@@ -27,10 +27,8 @@ La **Calculadora de IMC** es una aplicación diseñada para calcular el Índice 
 
 Imágenes o capturas de pantalla de la aplicación en diferentes dispositivos para mostrar el diseño y la funcionalidad.
 
-```markdown
 ## Capturas de Pantalla
 
 ![Mobile Design](./src/assets/MobileDesign.png)
 
 ![Desktop Desing](./src/assets/DesktopDesing.png)
-```
